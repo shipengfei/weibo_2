@@ -114,6 +114,11 @@ module WeiboOAuth2
         def emotions(opt={})
           hashie get("emotions.json", :params => opt)
         end
+
+        def share(status, pic, opt={})
+          multipart = build_multipart_bodies({"status" => status, "pic" => pic}, opt)
+          hashie post("statuses/share.json", :headers => multipart[:headers], :body => multipart[:body])
+        end
             
       end
     end
